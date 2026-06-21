@@ -8,8 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
         :root {
-            /* Живой глубокий мраморный фон */
-            --marble-base: #f8f9fa;
+            --marble-base: #f3f4f6;
             --rose-gold-linear: linear-gradient(135deg, #e5a9b4 0%, #b76e79 50%, #94525d 100%);
             --text-dark: #2a2021;
             --text-muted: #7d6e70;
@@ -23,31 +22,59 @@
             min-height: 100vh; overflow: hidden; position: relative;
             background-color: var(--marble-base);
             
-            /* Высокореалистичная CSS-текстура прожилок дорогого итальянского мрамора Calacatta */
+            /* Текстура итальянского мрамора */
             background-image: 
                 radial-gradient(at 30% 20%, rgba(210, 195, 195, 0.15) 0px, transparent 50%),
                 radial-gradient(at 85% 70%, rgba(183, 110, 121, 0.08) 0px, transparent 55%),
                 linear-gradient(140deg, transparent 20%, rgba(140, 130, 131, 0.12) 21%, rgba(140, 130, 131, 0.05) 23%, transparent 26%),
-                linear-gradient(45deg, transparent 65%, rgba(183, 110, 121, 0.06) 66%, rgba(140, 130, 131, 0.08) 68%, transparent 70%),
                 linear-gradient(115deg, transparent 40%, rgba(140, 130, 131, 0.08) 41%, transparent 43%, transparent 75%, rgba(210, 195, 195, 0.15) 76%, transparent 78%);
             background-size: 500px 500px;
         }
 
-        /* Объемный динамический глянцевый блик */
-        body::before {
-            content: ''; position: absolute; top: -50%; left: -100%; width: 60%; height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent);
-            transform: rotate(35deg);
-            animation: elegantSheen 7s infinite cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1; pointer-events: none;
+        /* КОНТЕЙНЕР ДЛЯ МОЩНОЙ ЗАДНЕЙ АНИМАЦИИ */
+        .bg-animation-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none; overflow: hidden;
         }
 
-        @keyframes elegantSheen {
-            0% { left: -120%; opacity: 0; }
-            15% { opacity: 1; }
-            50% { left: 130%; opacity: 1; }
-            65% { opacity: 0; }
-            100% { left: 130%; opacity: 0; }
+        /* Постоянно двигающиеся жидкие золотые туманности на фоне */
+        .marble-wave {
+            position: absolute; top: -20%; left: -20%; width: 140%; height: 140%;
+            background: radial-gradient(circle at 40% 40%, rgba(229, 169, 180, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 60%, rgba(183, 110, 121, 0.12) 0%, transparent 50%);
+            filter: blur(40px);
+            animation: waveMove 12s infinite ease-in-out alternate;
+        }
+        
+        .marble-wave-2 {
+            position: absolute; top: -10%; left: -10%; width: 130%; height: 130%;
+            background: radial-gradient(circle at 60% 30%, rgba(255, 255, 255, 0.7) 0%, transparent 30%),
+                        radial-gradient(circle at 20% 70%, rgba(140, 130, 131, 0.1) 0%, transparent 40%);
+            filter: blur(30px);
+            animation: waveMove2 15s infinite ease-in-out alternate;
+        }
+
+        /* Золотые блестки, парящие сзади карточки */
+        .marble-sparkle {
+            position: absolute; width: 4px; height: 4px; background: #e5a9b4;
+            border-radius: 50%; opacity: 0;
+            animation: floatSparkle 6s infinite ease-in-out;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(-5%, -8%) rotate(10deg) scale(1.1); }
+        }
+
+        @keyframes waveMove2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(6%, 5%) rotate(-15deg); }
+        }
+
+        @keyframes floatSparkle {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            50% { opacity: 0.6; transform: translateY(50vh) translateX(30px) scale(1.2); }
+            100% { transform: translateY(-10vh) translateX(-20px) scale(0); opacity: 0; }
         }
 
         /* Экранные контейнеры */
@@ -66,78 +93,70 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Кнопка из жидкого золота */
+        /* Кнопка */
         .main-btn {
             background: var(--rose-gold-linear); border: none; color: white;
             padding: 14px 40px; font-size: 0.85rem; font-weight: 600;
             border-radius: 50px; cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
-            box-shadow: 0 10px 25px rgba(183, 110, 121, 0.35), inset 0 -3px 0 rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(183, 110, 121, 0.35);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .main-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(183, 110, 121, 0.5), inset 0 -3px 0 rgba(0,0,0,0.15);
-            filter: brightness(1.05);
+            box-shadow: 0 15px 30px rgba(183, 110, 121, 0.5);
         }
 
-        /* Роскошное парящее 3D-Стекло */
+        /* Парящее 3D-Стекло */
         .card-container {
-            background: rgba(255, 255, 255, 0.72); padding: 30px 22px;
+            background: rgba(255, 255, 255, 0.75); padding: 30px 22px;
             border-radius: 24px; text-align: center; width: 100%; box-sizing: border-box;
-            
-            /* Сложные глубокие тени для эффекта парения над камнем */
             box-shadow: 
-                0 4px 6px rgba(0, 0, 0, 0.02),
-                0 20px 40px rgba(42, 32, 33, 0.08),
+                0 10px 20px rgba(42, 32, 33, 0.05),
+                0 30px 60px rgba(42, 32, 33, 0.12),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.9);
-            
             border: 1px solid rgba(183, 110, 121, 0.25);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             position: relative;
         }
 
-        /* Геометрическая тонкая золотая рамка внутри карточки */
         .card-inner-border {
             position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid rgba(183, 110, 121, 0.15);
-            border-radius: 16px; pointer-events: none;
+            border: 1px solid rgba(183, 110, 121, 0.15); border-radius: 16px; pointer-events: none;
         }
         
-        /* Металлизированные имена */
         .names { 
-            font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; 
-            margin: 8px 0; line-height: 1.1;
-            background: var(--rose-gold-linear);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; margin: 8px 0; line-height: 1.1;
+            background: var(--rose-gold-linear); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Улучшенный контрастный таймер */
+        /* Контрастный таймер */
         .countdown { display: flex; justify-content: center; gap: 8px; margin: 18px 0; }
         .time-block {
-            background: white; width: 56px; padding: 8px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(42, 32, 33, 0.04);
-            border: 1px solid rgba(183, 110, 121, 0.12);
+            background: white; width: 56px; padding: 8px 0; border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(42, 32, 33, 0.04); border: 1px solid rgba(183, 110, 121, 0.12);
         }
         .time-block span { 
             font-size: 1.3rem; font-weight: 600; display: block;
-            background: var(--rose-gold-linear);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background: var(--rose-gold-linear); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .time-block label { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 1px; display: block; margin-top: 2px; font-weight: 500; }
-        .time-separator { align-self: center; font-size: 1.2rem; color: #b76e79; opacity: 0.6; font-weight: 300; }
+        .time-separator { align-self: center; font-size: 1.2rem; color: #b76e79; opacity: 0.6; }
 
         /* Элементы контента */
-        .info-box { 
-            background: rgba(255, 255, 255, 0.6); border-radius: 14px; padding: 12px; 
-            border: 1px solid rgba(183, 110, 121, 0.08); 
-        }
+        .info-box { background: rgba(255, 255, 255, 0.65); border-radius: 14px; padding: 12px; border: 1px solid rgba(183, 110, 121, 0.08); }
         .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         h3 { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin: 0 0 4px 0; text-transform: uppercase; font-weight: 600; }
         p { margin: 0; font-size: 0.85rem; color: var(--text-dark); }
     </style>
 </head>
 <body>
+
+    <!-- Живой задний план -->
+    <div class="bg-animation-container">
+        <div class="marble-wave"></div>
+        <div class="marble-wave-2"></div>
+        <!-- Скрипт сам заполнит блестками -->
+    </div>
 
     <!-- ЭКРАН 1: ВХОД -->
     <div id="envelope-screen" class="screen" style="text-align: center;">
@@ -201,6 +220,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Переключение экранов
             document.getElementById("open-btn").addEventListener("click", () => {
                 const env = document.getElementById("envelope-screen");
                 const info = document.getElementById("info-screen");
@@ -212,6 +232,7 @@
                 }, 500);
             });
 
+            // Таймер
             const targetDate = new Date("September 20, 2027 14:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
@@ -222,6 +243,17 @@
                 document.getElementById("minutes").textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
                 document.getElementById("seconds").textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
             }, 1000);
+
+            // Генератор фоновых блесток
+            const animContainer = document.querySelector('.bg-animation-container');
+            for (let i = 0; i < 15; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.classList.add('marble-sparkle');
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.animationDelay = Math.random() * 5 + 's';
+                sparkle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                animContainer.appendChild(sparkle);
+            }
         });
     </script>
 </body>
