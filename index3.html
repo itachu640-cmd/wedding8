@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадебное Приглашение — Мраморный Глянец</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Montserrat:wght@300;400;600&display=swap');
+
+        :root {
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-main: #2c2523;
+            --text-muted: #8c7e7a;
+            --rose-gold: #b76e79; /* Розовое золото */
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden; position: relative;
+            
+            /* Сложная текстура белого мрамора на чистом CSS */
+            background-color: #f5f5f7;
+            background-image: 
+                linear-gradient(125deg, rgba(200,200,200,0.15) 0%, transparent 40%),
+                linear-gradient(45deg, rgba(140,126,122,0.08) 12%, transparent 13%, transparent 45%, rgba(183,110,121,0.05) 46%, transparent 48%),
+                linear-gradient(135deg, transparent 30%, rgba(140,126,122,0.06) 31%, transparent 33%, transparent 70%, rgba(200,200,200,0.1) 71%, transparent 73%);
+            background-size: 400px 400px;
+        }
+
+        /* Глянцевый блик, бегущий по мрамору */
+        body::before {
+            content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-30deg);
+            animation: marbleSheen 8s infinite linear;
+            z-index: 1; pointer-events: none;
+        }
+
+        @keyframes marbleSheen {
+            0% { left: -150%; }
+            50% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Экраны */
+        .screen {
+            width: 100%; max-width: 375px; height: auto;
+            padding: 15px; box-sizing: border-box;
+            display: flex; flex-direction: column; justify-content: center;
+            position: relative; z-index: 2; transition: all 0.6s ease;
+        }
+        .hidden { display: none !important; }
+        .fade-out { opacity: 0; transform: translateY(15px); filter: blur(4px); }
+        .fade-in { animation: reveal 0.7s cubic-bezier(0.1, 1, 0.1, 1) forwards; }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Кнопка */
+        .main-btn {
+            background: linear-gradient(135deg, #d4939d, #b76e79);
+            border: none; color: white; padding: 12px 35px; font-size: 0.85rem;
+            font-weight: 600; border-radius: 30px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(183, 110, 121, 0.3); transition: all 0.3s;
+            letter-spacing: 1.5px; text-transform: uppercase;
+        }
+        .main-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(183, 110, 121, 0.5); }
+
+        /* Матовая стеклянная карточка на мраморе */
+        .card-container {
+            background: var(--card-bg); padding: 25px 20px;
+            border-radius: 16px; text-align: center; width: 100%; box-sizing: border-box;
+            box-shadow: 0 15px 35px rgba(44, 37, 35, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+        }
+        
+        .names { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 500; color: var(--text-main); margin: 6px 0; }
+        .names span { color: var(--rose-gold); }
+
+        /* Компактный аккуратный таймер */
+        .countdown { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
+        .time-block {
+            background: rgba(255, 255, 255, 0.9); width: 56px; padding: 6px 0;
+            border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid rgba(183, 110, 121, 0.15);
+        }
+        .time-block span { font-size: 1.2rem; font-weight: 600; color: var(--rose-gold); display: block; }
+        .time-block label { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 1px; display: block; }
+        .time-separator { align-self: center; font-size: 1rem; color: var(--rose-gold); opacity: 0.5; }
+
+        /* Сетка */
+        .info-box { background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; border: 1px solid rgba(0,0,0,0.02); }
+        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        h3 { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin: 0 0 3px 0; text-transform: uppercase; font-weight: 600; }
+        p { margin: 0; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- ЭКРАН 1: ВХОД -->
+    <div id="envelope-screen" class="screen" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 10px; color: var(--rose-gold);">✨</div>
+        <p style="letter-spacing: 3px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600;">ПРИГЛАШЕНИЕ ДЛЯ</p>
+        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.3rem; margin-top: 0; color: var(--text-main); margin-bottom: 40px; font-weight: 500;">ДОРОГОГО ГОСТЯ</h1>
+        <button id="open-btn" class="main-btn">Открыть</button>
+    </div>
+
+    <!-- ЭКРАН 2: ИНФОРМАЦИЯ -->
+    <div id="info-screen" class="screen hidden">
+        <div class="card-container">
+            <p style="font-size: 0.65rem; letter-spacing: 3px; color: var(--text-muted); font-weight: 600; margin-top: 0; text-transform: uppercase;">Wedding Invitation</p>
+            <p style="margin: 2px 0; font-size: 0.9rem; font-family: 'Cormorant Garamond', serif; font-style: italic;">Дорогой Гость,</p>
+            <h2 class="names">Влад <span>&</span> Диана</h2>
+            <p style="font-size: 0.85rem; line-height: 1.5; color: #4a413f; padding: 0 5px;">Со всей искренностью приглашаем вас разделить этот счастливый день нашей жизни</p>
+            
+            <div style="color: var(--rose-gold); margin: 10px 0; font-size: 0.7rem; letter-spacing: 4px;">✦  ✦  ✦</div>
+
+            <!-- Таймер -->
+            <section>
+                <div class="countdown">
+                    <div class="time-block"><span id="days">00</span><label>ДН</label></div>
+                    <div class="time-separator">:</div>
+                    <div class="time-block"><span id="hours">00</span><label>ЧС</label></div>
+                    <div class="time-separator">:</div>
+                    <div class="time-block"><span id="minutes">00</span><label>МН</label></div>
+                    <div class="time-separator">:</div>
+                    <div class="time-block"><span id="seconds">00</span><label>СК</label></div>
+                </div>
+            </section>
+
+            <!-- Блоки деталей -->
+            <div class="details-grid">
+                <div class="info-box">
+                    <h3>ДАТА</h3>
+                    <p style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">20 Сентября</p>
+                    <p style="font-size: 0.75rem; color: var(--text-muted);">2027 года</p>
+                </div>
+                <div class="info-box">
+                    <h3>ВРЕМЯ</h3>
+                    <p style="font-weight: 500;">Никах — 14:00</p>
+                    <p style="font-weight: 500; margin-top: 2px;">Банкет — 18:00</p>
+                </div>
+            </div>
+
+            <!-- Место -->
+            <section class="info-box">
+                <h3>МЕСТО ТОРЖЕСТВА</h3>
+                <p style="font-weight: 600; color: var(--text-main); font-size: 0.95rem; margin-bottom: 2px;">Зал «Жемчужина»</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted);">ул. Навои 12, Ташкент</p>
+            </section>
+
+            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--rose-gold); font-style: italic; font-weight: 500;">Будем очень рады вам!</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("open-btn").addEventListener("click", () => {
+                const env = document.getElementById("envelope-screen");
+                const info = document.getElementById("info-screen");
+                env.classList.add("fade-out");
+                setTimeout(() => {
+                    env.classList.add("hidden");
+                    info.classList.remove("hidden");
+                    info.classList.add("fade-in");
+                }, 500);
+            });
+
+            const targetDate = new Date("September 20, 2027 14:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+                if (diff < 0) return;
+                document.getElementById("days").textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById("hours").textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById("minutes").textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById("seconds").textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
