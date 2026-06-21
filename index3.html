@@ -3,134 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Свадебное Приглашение — Мраморный Глянец</title>
+    <title>Свадебное Приглашение — Мраморный Премиум</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Montserrat:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
         :root {
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --text-main: #2c2523;
-            --text-muted: #8c7e7a;
-            --rose-gold: #b76e79; /* Розовое золото */
+            /* Живой глубокий мраморный фон */
+            --marble-base: #f8f9fa;
+            --rose-gold-linear: linear-gradient(135deg, #e5a9b4 0%, #b76e79 50%, #94525d 100%);
+            --text-dark: #2a2021;
+            --text-muted: #7d6e70;
         }
 
         body {
             margin: 0; padding: 0;
             font-family: 'Montserrat', sans-serif;
-            color: var(--text-main);
+            color: var(--text-dark);
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; overflow: hidden; position: relative;
+            background-color: var(--marble-base);
             
-            /* Сложная текстура белого мрамора на чистом CSS */
-            background-color: #f5f5f7;
+            /* Высокореалистичная CSS-текстура прожилок дорогого итальянского мрамора Calacatta */
             background-image: 
-                linear-gradient(125deg, rgba(200,200,200,0.15) 0%, transparent 40%),
-                linear-gradient(45deg, rgba(140,126,122,0.08) 12%, transparent 13%, transparent 45%, rgba(183,110,121,0.05) 46%, transparent 48%),
-                linear-gradient(135deg, transparent 30%, rgba(140,126,122,0.06) 31%, transparent 33%, transparent 70%, rgba(200,200,200,0.1) 71%, transparent 73%);
-            background-size: 400px 400px;
+                radial-gradient(at 30% 20%, rgba(210, 195, 195, 0.15) 0px, transparent 50%),
+                radial-gradient(at 85% 70%, rgba(183, 110, 121, 0.08) 0px, transparent 55%),
+                linear-gradient(140deg, transparent 20%, rgba(140, 130, 131, 0.12) 21%, rgba(140, 130, 131, 0.05) 23%, transparent 26%),
+                linear-gradient(45deg, transparent 65%, rgba(183, 110, 121, 0.06) 66%, rgba(140, 130, 131, 0.08) 68%, transparent 70%),
+                linear-gradient(115deg, transparent 40%, rgba(140, 130, 131, 0.08) 41%, transparent 43%, transparent 75%, rgba(210, 195, 195, 0.15) 76%, transparent 78%);
+            background-size: 500px 500px;
         }
 
-        /* Глянцевый блик, бегущий по мрамору */
+        /* Объемный динамический глянцевый блик */
         body::before {
-            content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
-            transform: skewX(-30deg);
-            animation: marbleSheen 8s infinite linear;
+            content: ''; position: absolute; top: -50%; left: -100%; width: 60%; height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent);
+            transform: rotate(35deg);
+            animation: elegantSheen 7s infinite cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1; pointer-events: none;
         }
 
-        @keyframes marbleSheen {
-            0% { left: -150%; }
-            50% { left: 150%; }
-            100% { left: 150%; }
+        @keyframes elegantSheen {
+            0% { left: -120%; opacity: 0; }
+            15% { opacity: 1; }
+            50% { left: 130%; opacity: 1; }
+            65% { opacity: 0; }
+            100% { left: 130%; opacity: 0; }
         }
 
-        /* Экраны */
+        /* Экранные контейнеры */
         .screen {
-            width: 100%; max-width: 375px; height: auto;
+            width: 100%; max-width: 365px; height: auto;
             padding: 15px; box-sizing: border-box;
             display: flex; flex-direction: column; justify-content: center;
-            position: relative; z-index: 2; transition: all 0.6s ease;
+            position: relative; z-index: 2; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .hidden { display: none !important; }
-        .fade-out { opacity: 0; transform: translateY(15px); filter: blur(4px); }
-        .fade-in { animation: reveal 0.7s cubic-bezier(0.1, 1, 0.1, 1) forwards; }
+        .fade-out { opacity: 0; transform: translateY(-20px) scale(0.95); filter: blur(4px); }
+        .fade-in { animation: smoothReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        @keyframes reveal {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes smoothReveal {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Кнопка */
+        /* Кнопка из жидкого золота */
         .main-btn {
-            background: linear-gradient(135deg, #d4939d, #b76e79);
-            border: none; color: white; padding: 12px 35px; font-size: 0.85rem;
-            font-weight: 600; border-radius: 30px; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(183, 110, 121, 0.3); transition: all 0.3s;
-            letter-spacing: 1.5px; text-transform: uppercase;
+            background: var(--rose-gold-linear); border: none; color: white;
+            padding: 14px 40px; font-size: 0.85rem; font-weight: 600;
+            border-radius: 50px; cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(183, 110, 121, 0.35), inset 0 -3px 0 rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .main-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(183, 110, 121, 0.5); }
+        .main-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(183, 110, 121, 0.5), inset 0 -3px 0 rgba(0,0,0,0.15);
+            filter: brightness(1.05);
+        }
 
-        /* Матовая стеклянная карточка на мраморе */
+        /* Роскошное парящее 3D-Стекло */
         .card-container {
-            background: var(--card-bg); padding: 25px 20px;
-            border-radius: 16px; text-align: center; width: 100%; box-sizing: border-box;
-            box-shadow: 0 15px 35px rgba(44, 37, 35, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.72); padding: 30px 22px;
+            border-radius: 24px; text-align: center; width: 100%; box-sizing: border-box;
+            
+            /* Сложные глубокие тени для эффекта парения над камнем */
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.02),
+                0 20px 40px rgba(42, 32, 33, 0.08),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+            
+            border: 1px solid rgba(183, 110, 121, 0.25);
+            backdrop-filter: blur(25px);
+            position: relative;
+        }
+
+        /* Геометрическая тонкая золотая рамка внутри карточки */
+        .card-inner-border {
+            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(183, 110, 121, 0.15);
+            border-radius: 16px; pointer-events: none;
         }
         
-        .names { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 500; color: var(--text-main); margin: 6px 0; }
-        .names span { color: var(--rose-gold); }
-
-        /* Компактный аккуратный таймер */
-        .countdown { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
-        .time-block {
-            background: rgba(255, 255, 255, 0.9); width: 56px; padding: 6px 0;
-            border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            border: 1px solid rgba(183, 110, 121, 0.15);
+        /* Металлизированные имена */
+        .names { 
+            font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; 
+            margin: 8px 0; line-height: 1.1;
+            background: var(--rose-gold-linear);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .time-block span { font-size: 1.2rem; font-weight: 600; color: var(--rose-gold); display: block; }
-        .time-block label { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 1px; display: block; }
-        .time-separator { align-self: center; font-size: 1rem; color: var(--rose-gold); opacity: 0.5; }
 
-        /* Сетка */
-        .info-box { background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; border: 1px solid rgba(0,0,0,0.02); }
+        /* Улучшенный контрастный таймер */
+        .countdown { display: flex; justify-content: center; gap: 8px; margin: 18px 0; }
+        .time-block {
+            background: white; width: 56px; padding: 8px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(42, 32, 33, 0.04);
+            border: 1px solid rgba(183, 110, 121, 0.12);
+        }
+        .time-block span { 
+            font-size: 1.3rem; font-weight: 600; display: block;
+            background: var(--rose-gold-linear);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .time-block label { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 1px; display: block; margin-top: 2px; font-weight: 500; }
+        .time-separator { align-self: center; font-size: 1.2rem; color: #b76e79; opacity: 0.6; font-weight: 300; }
+
+        /* Элементы контента */
+        .info-box { 
+            background: rgba(255, 255, 255, 0.6); border-radius: 14px; padding: 12px; 
+            border: 1px solid rgba(183, 110, 121, 0.08); 
+        }
         .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-        h3 { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin: 0 0 3px 0; text-transform: uppercase; font-weight: 600; }
-        p { margin: 0; font-size: 0.85rem; }
+        h3 { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin: 0 0 4px 0; text-transform: uppercase; font-weight: 600; }
+        p { margin: 0; font-size: 0.85rem; color: var(--text-dark); }
     </style>
 </head>
 <body>
 
     <!-- ЭКРАН 1: ВХОД -->
     <div id="envelope-screen" class="screen" style="text-align: center;">
-        <div style="font-size: 2rem; margin-bottom: 10px; color: var(--rose-gold);">✨</div>
-        <p style="letter-spacing: 3px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600;">ПРИГЛАШЕНИЕ ДЛЯ</p>
-        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.3rem; margin-top: 0; color: var(--text-main); margin-bottom: 40px; font-weight: 500;">ДОРОГОГО ГОСТЯ</h1>
+        <div style="font-size: 2.2rem; margin-bottom: 12px; background: var(--rose-gold-linear); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">✦</div>
+        <p style="letter-spacing: 4px; color: var(--text-muted); font-size: 0.75rem; font-weight: 600;">ПРИГЛАШЕНИЕ ДЛЯ</p>
+        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; margin-top: 4px; color: var(--text-dark); margin-bottom: 45px; font-weight: 400; letter-spacing: 1px;">ДОРОГОГО ГОСТЯ</h1>
         <button id="open-btn" class="main-btn">Открыть</button>
     </div>
 
     <!-- ЭКРАН 2: ИНФОРМАЦИЯ -->
     <div id="info-screen" class="screen hidden">
         <div class="card-container">
-            <p style="font-size: 0.65rem; letter-spacing: 3px; color: var(--text-muted); font-weight: 600; margin-top: 0; text-transform: uppercase;">Wedding Invitation</p>
-            <p style="margin: 2px 0; font-size: 0.9rem; font-family: 'Cormorant Garamond', serif; font-style: italic;">Дорогой Гость,</p>
-            <h2 class="names">Влад <span>&</span> Диана</h2>
-            <p style="font-size: 0.85rem; line-height: 1.5; color: #4a413f; padding: 0 5px;">Со всей искренностью приглашаем вас разделить этот счастливый день нашей жизни</p>
+            <div class="card-inner-border"></div>
             
-            <div style="color: var(--rose-gold); margin: 10px 0; font-size: 0.7rem; letter-spacing: 4px;">✦  ✦  ✦</div>
+            <p style="font-size: 0.65rem; letter-spacing: 3px; color: var(--text-muted); font-weight: 600; margin-top: 0; text-transform: uppercase;">Wedding Invitation</p>
+            <p style="margin: 4px 0 0 0; font-size: 0.95rem; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-muted);">Дорогой Гость,</p>
+            
+            <h2 class="names">Влад & Диана</h2>
+            
+            <p style="font-size: 0.85rem; line-height: 1.5; color: #423536; padding: 0 8px; font-weight: 400;">Разделите с нами особенное мгновение любви — день нашего бракосочетания</p>
+            
+            <div style="background: var(--rose-gold-linear); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 12px 0; font-size: 0.8rem; letter-spacing: 5px;">✦✦✦</div>
 
             <!-- Таймер -->
             <section>
                 <div class="countdown">
-                    <div class="time-block"><span id="days">00</span><label>ДН</label></div>
-                    <div class="time-separator">:</div>
-                    <div class="time-block"><span id="hours">00</span><label>ЧС</label></div>
-                    <div class="time-separator">:</div>
-                    <div class="time-block"><span id="minutes">00</span><label>МН</label></div>
-                    <div class="time-separator">:</div>
-                    <div class="time-block"><span id="seconds">00</span><label>СК</label></div>
+                    <div class="time-block"><span id="days">00</span><label>ДНЕЙ</label></div>
+                    <div class="time-separator">•</div>
+                    <div class="time-block"><span id="hours">00</span><label>ЧАСОВ</label></div>
+                    <div class="time-separator">•</div>
+                    <div class="time-block"><span id="minutes">00</span><label>МИНУТ</label></div>
+                    <div class="time-separator">•</div>
+                    <div class="time-block"><span id="seconds">00</span><label>СЕКУНД</label></div>
                 </div>
             </section>
 
@@ -138,24 +178,24 @@
             <div class="details-grid">
                 <div class="info-box">
                     <h3>ДАТА</h3>
-                    <p style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">20 Сентября</p>
+                    <p style="font-weight: 600; color: var(--text-dark); font-size: 1rem;">20 Сентября</p>
                     <p style="font-size: 0.75rem; color: var(--text-muted);">2027 года</p>
                 </div>
                 <div class="info-box">
                     <h3>ВРЕМЯ</h3>
                     <p style="font-weight: 500;">Никах — 14:00</p>
-                    <p style="font-weight: 500; margin-top: 2px;">Банкет — 18:00</p>
+                    <p style="font-weight: 500; margin-top: 3px;">Банкет — 18:00</p>
                 </div>
             </div>
 
             <!-- Место -->
             <section class="info-box">
                 <h3>МЕСТО ТОРЖЕСТВА</h3>
-                <p style="font-weight: 600; color: var(--text-main); font-size: 0.95rem; margin-bottom: 2px;">Зал «Жемчужина»</p>
+                <p style="font-weight: 600; color: var(--text-dark); font-size: 1rem; margin-bottom: 2px;">Зал «Жемчужина»</p>
                 <p style="font-size: 0.75rem; color: var(--text-muted);">ул. Навои 12, Ташкент</p>
             </section>
 
-            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--rose-gold); font-style: italic; font-weight: 500;">Будем очень рады вам!</p>
+            <p style="margin-top: 22px; font-size: 0.8rem; color: #b76e79; font-style: italic; font-weight: 600; letter-spacing: 0.5px;">Мы будем очень рады вам!</p>
         </div>
     </div>
 
